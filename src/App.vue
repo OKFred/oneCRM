@@ -1,26 +1,18 @@
-<script setup>
-//导入模块
-//import HelloWorld from './components/HelloWorld.vue'
-import Home from './view/home/index.vue'
+<template>
+  <frameWork :fn="fn" :baseData="baseData" />
+</template>
 
-//声明变量
+<script setup>
+//模块引入
+import { reactive } from 'vue';
+import frameWork from '@/views/frame/index.vue';
+
+//全局变量 & 函数
+let baseData = reactive({ name: 'baseData', selectedKeys: ['2'] });
 let name = 'fred';
 
-function fn (str) {
+function fn(str) {
   console.log(str);
   console.log(name);
 };
-
 </script>
-
-<template>
-  <Home />
-  <!-- <HelloWorld msg="Hello Vue 3 + Vite" :name="name" :fn="fn" /> -->
-</template>
-
-<style>
-html,body,#app {
-  height: 100%;
-  background-color: pink;
-}
-</style>
