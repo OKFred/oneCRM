@@ -1,14 +1,14 @@
 <template>
   <div style="height: 100%;">
     <div name="header"
-      style="background-color: rgb(0, 21, 41); display: flex; flex-direction: row; align-items: center; width: 100%;box-sizing: border-box;flex-shrink: 0;position: fixed; z-index: 1100;top: 0px;left: auto;right: 0px;">
+      style="background-color: rgb(0, 21, 41); display: flex; flex-direction: row; align-items: center; width: 100%;box-sizing: border-box;flex-shrink: 0;position: fixed; z-index: 1080;top: 0px;left: auto;right: 0px;">
       <logo-bar style="display: inline-block; padding-left: 10px; padding-right: 150px;" />
       <search-bar style="display: inline-block;  padding-right: 50px;" />
       <setting-bar
         style="display: flex; flex-direction: row; align-items: center; align-content:center; padding-left: 50px; background-color: seashell; border-radius: 30px; height: 50px; margin-right: 50px;" />
     </div>
     <a-layout-sider breakpoint="md" collapsed-width="0"
-      style="position: fixed; height: 100%;top: 70px;transition: margin 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;">
+      style="position: fixed; height: 100%;top: 70px;transition: margin 225ms cubic-bezier(0, 0, 0.2, 1) 0ms; z-index: 1080;">
       <side-bar />
     </a-layout-sider>
     <a-layout class="layout"
