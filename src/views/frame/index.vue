@@ -8,12 +8,10 @@
                 flex-direction: row;
                 align-items: center;
                 width: 100%;
-                box-sizing: border-box;
-                flex-shrink: 0;
+                height: 75px;
                 position: fixed;
                 z-index: 1080;
                 top: 0px;
-                left: auto;
                 right: 0px;
             "
         >
@@ -26,7 +24,7 @@
             <search-bar
                 :globalObj="globalObj"
                 :style="{
-                    paddingLeft: '10px',
+                    paddingLeft: '25px',
                     paddingRight: '50px',
                     transition: 'padding 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
                 }"
@@ -52,12 +50,12 @@
             style="
                 position: fixed;
                 height: 100%;
-                top: 70px;
+                top: 71px;
                 transition: margin 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
                 z-index: 1080;
             "
-        ><div style="color: red; font-size: 22px;">{{count}}</div>
-            <side-bar :globalObj="globalObj" :setLocale="setLocale" :increment="increment" :fatherCount="count" />
+        >
+            <side-bar :globalObj="globalObj" />
         </a-layout-sider>
         <a-layout
             class="layout"
@@ -65,7 +63,7 @@
                 borderRadius: '8px',
                 backgroundColor: 'rgb(227, 242, 253)',
                 paddingLeft: pageObj.layoutLeft,
-                paddingTop: '75px',
+                paddingTop: '80px',
                 transition: 'margin 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
             }"
             breakpoint="md"
@@ -88,7 +86,7 @@
 
 <script setup>
 //模块引入
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import logoBar from '@/views/frame/components/logobar.vue'
 import searchBar from '@/views/frame/components/searchbar.vue'
 import settingBar from '@/views/frame/components/settingbar.vue'
@@ -97,15 +95,10 @@ import footerBar from '@/views/frame/components/footerbar.vue'
 
 //父系入参
 const props = defineProps({
-    globalObj: Object,
-    setLocale: Function,
+    globalObj: Object
 })
 
-    //本地变量和函数
-const count = ref(0)
-const increment = () => {
-count.value++
-}
+//本地变量和函数
 let pageObj = reactive({
     layoutLeft: '200px',
     logoPaddingRight: '130px',

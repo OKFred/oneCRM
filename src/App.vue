@@ -1,5 +1,5 @@
 <template>
-    <frameWork :globalObj="globalObj" :setLocale="setLocale" />
+    <frameWork :globalObj="globalObj" />
 </template>
 
 <script setup>
@@ -25,19 +25,13 @@ window.prepareMsg = prepareMsg;
 window.CountryRegions = CountryRegions
 let globalObj = reactive({
     name: 'globalObj',
-    currentPage: 'home',
-    setCurrentPage: (page) => {
-        let newObj = {...globalObj};
-        newObj.currentPage = page;
-        globalObj = (newObj);
+    currentTab: 'home',
+    setCurrentTab: function (currentTab) {
+        this.currentTab = currentTab
     },
     locale: 'zhCN',
-    setLocale: (locale) => {
-        let newObj = {...globalObj};
-        newObj.locale = locale;
-        globalObj = (newObj);
-        console.log('setting locale', globalObj.locale);
+    setLocale: function (locale) {
+        this.locale = locale
     },
 })
-const setLocale =()=> globalObj.locale = 'enUS';
 </script>

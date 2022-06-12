@@ -1,16 +1,20 @@
 let Languages = {
-    'zhCN': {
+    zhCN: {
         tab: {
-            'Home': '首页',
-            'PrivateSearch': '搜索',
-        }
+            Home: '首页',
+            Customer: '客户',
+            Order: '订单',
+            Profile: '我的',
+        },
     },
-    'enUS': {
+    enUS: {
         tab: {
-            'Home': 'Home',
-            'PrivateSearch': 'Search',
-        }
-    }
-};
+            Home: 'Home',
+            Customer: 'Customer',
+            Order: 'Order',
+            Profile: 'Profile',
+        },
+    },
+}
 
-export default Languages;
+export default Languages
