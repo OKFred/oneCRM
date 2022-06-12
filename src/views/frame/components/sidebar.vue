@@ -30,16 +30,13 @@ const props = defineProps({
     globalObj: Object,
     increment: Function,
     fatherCount: Number,
+    setLocale: Function,
 })
 //本地变量和函数
-let langPack = Languages[props.globalObj.locale] //语言包
 let pageObj = reactive({ name: 'sidebar', tab: ['Home'] })
 
-computed({
-    langPack: () => {
-        console.log('计算一下...');
-        return Languages[props.globalObj.locale]
-    },
+const langPack = computed(() => {
+    return Languages[props.globalObj.locale]
 })
 
 watch(
@@ -58,12 +55,21 @@ watch(
     },
 )
 
+const emits = defineEmits(['setLocale']);
 function changeLocale() {
+    return emits('setLocale');
+    props.globalObj.locale == 'zhCN'
+        ? props.globalObj.setLocale('enUS')
+        : props.globalObj.setLocale('zhCN')
+    props.increment()
+} //通过setter 改，不成功
+
+/* function changeLocale() {
     props.globalObj.locale == 'zhCN'
         ? (props.globalObj.locale = 'enUS')
         : (props.globalObj.locale = 'zhCN')
     props.increment()
-}
+} //直接修改 props 可以 */
 
 onUpdated(() => {
     console.log('sidebar: onUpdated')

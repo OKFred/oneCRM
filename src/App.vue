@@ -1,5 +1,5 @@
 <template>
-    <frameWork :globalObj="globalObj" />
+    <frameWork :globalObj="globalObj" :setLocale="setLocale" />
 </template>
 
 <script setup>
@@ -39,4 +39,5 @@ let globalObj = reactive({
         console.log('setting locale', globalObj.locale);
     },
 })
+const setLocale =()=> globalObj.locale = 'enUS';
 </script>

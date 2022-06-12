@@ -57,7 +57,7 @@
                 z-index: 1080;
             "
         ><div style="color: red; font-size: 22px;">{{count}}</div>
-            <side-bar :globalObj="globalObj" :increment="increment" :fatherCount="count" />
+            <side-bar :globalObj="globalObj" :setLocale="setLocale" :increment="increment" :fatherCount="count" />
         </a-layout-sider>
         <a-layout
             class="layout"
@@ -98,6 +98,7 @@ import footerBar from '@/views/frame/components/footerbar.vue'
 //父系入参
 const props = defineProps({
     globalObj: Object,
+    setLocale: Function,
 })
 
     //本地变量和函数
