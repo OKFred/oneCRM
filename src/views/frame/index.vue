@@ -18,7 +18,7 @@
             <logo-bar
                 :style="{
                     paddingLeft: '10px',
-                    paddingRight: pageObj.logoPaddingRight,
+                    paddingRight: localObj.logoPaddingRight,
                 }"
             />
             <search-bar
@@ -62,7 +62,7 @@
             :style="{
                 borderRadius: '8px',
                 backgroundColor: 'rgb(227, 242, 253)',
-                paddingLeft: pageObj.layoutLeft,
+                paddingLeft: localObj.layoutLeft,
                 paddingTop: '80px',
                 transition: 'margin 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
             }"
@@ -99,15 +99,15 @@ const props = defineProps({
 })
 
 //本地变量和函数
-let pageObj = reactive({
+let localObj = reactive({
     layoutLeft: '200px',
     logoPaddingRight: '130px',
 })
 
 const onBreakpoint = (broken) => {
     //console.log('onBreakpoint', broken)
-    pageObj.layoutLeft = broken ? '0px' : '200px'
-    pageObj.logoPaddingRight = broken ? '0px' : '130px'
+    localObj.layoutLeft = broken ? '0px' : '200px'
+    localObj.logoPaddingRight = broken ? '0px' : '130px'
 } //断点处理
 
 window.matchMedia('(max-width: 768px)').addEventListener('change', (e) => {

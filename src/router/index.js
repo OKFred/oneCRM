@@ -10,11 +10,27 @@ const routes = [
         }
     },
     {
-        path: '/setting',
-        name: 'Setting',
-        component: () => import('@/views/setting/index.vue'),
+        path: '/customer',
+        name: 'Customer',
+        component: () => import('@/views/customer/index.vue'),
         meta: {
-            title: '设置'
+            title: '客户'
+        }
+    },
+    {
+        path: '/order',
+        name: 'Order',
+        component: () => import('@/views/order/index.vue'),
+        meta: {
+            title: '订单'
+        }
+    },
+    {
+        path: '/profile',
+        name: 'Profile',
+        component: () => import('@/views/profile/index.vue'),
+        meta: {
+            title: '我的'
         }
     }
 ]

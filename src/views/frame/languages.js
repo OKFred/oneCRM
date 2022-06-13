@@ -1,4 +1,4 @@
-let Languages = {
+let languages = {
     zhCN: {
         tab: {
             Home: '首页',
@@ -17,4 +17,4 @@ let Languages = {
     },
 }
 
-export default Languages
+export default languages

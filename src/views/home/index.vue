@@ -17,17 +17,32 @@
 </template>
 
 <script setup>
-import { reactive, onActivated, onMounted } from 'vue'
+import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
+import languages from '@/views/home/languages.js'
 import { Chart } from '@antv/g2';
-let _home = reactive({ name: '主页', selectedKeys: ['2'], chart: null })
 
-onActivated(() => {
-    console.log('home: onActivated');
+//父系入参
+const props = defineProps({
+    globalObj: Object,
+})
+//本地变量和函数
+let localObj = reactive({ name: 'home' , chart: null})
+
+const langPack = computed(() => {
+    return languages[props.globalObj.locale]
+})
+
+onUpdated(() => {
+    console.log('home: onUpdated')
 })
 onMounted(() => {
-    console.log('home: onMounted');
+    console.log('home: onMounted')
 })
-const props = defineProps({
+onActivated(() => {
+    console.log('home: onActivated')
+})
+onDeactivated(() => {
+    console.log('home: onDeactivated')
 })
 
     const data = reactive([
@@ -38,26 +53,22 @@ const props = defineProps({
     { genre: 'Other', sold: 150 },
     ]);
 function loadGraph(hide){
-    if (hide && _home.chart) return _home.chart.hide();
+    if (hide && localObj.chart) return localObj.chart.hide();
     // Step 1: 创建 Chart 对象
-    _home.chart = new Chart({
+    localObj.chart = new Chart({
     container: 'c1', // 指定图表容器 ID
     width: 600, // 指定图表宽度
     height: 300, // 指定图表高度
     });
 
     // Step 2: 载入数据源
-    _home.chart.data(data);
+    localObj.chart.data(data);
 
     // Step 3: 创建图形语法，绘制柱状图
-    _home.chart.interval().position('genre*sold');
+    localObj.chart.interval().position('genre*sold');
 
     // Step 4: 渲染图表
-    _home.chart.render();
-}
-function onHomeClick() {
-    _home.name = _home.name === '主页' ? 'Home' : '主页'
-    props.setCurrentPage('setting')
+    localObj.chart.render();
 }
 </script>
 

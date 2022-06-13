@@ -1,24 +1,24 @@
 <template>
-    <a-menu v-model:selectedKeys="pageObj.tab" theme="dark" mode="inline">
+    <a-menu v-model:selectedKeys="localObj.tab" theme="dark" mode="inline">
         <a-menu-item key="Home" @click="this.$router.push('/')">
             <span style="font-size: 16px; color: white;">
-                <font-awesome-icon icon="house-user" />
+                <font-awesome-icon icon="house-chimney" />
             </span>
             <span class="nav-text" style="padding: 10px;">{{ langPack.tab.Home }}</span>
         </a-menu-item>
-        <a-menu-item key="Search" @click="changeLocale">
+        <a-menu-item key="Customer" @click="this.$router.push('/customer')">
             <span style="font-size: 16px; color: white;">
                 <font-awesome-icon icon="users" />
             </span>
             <span class="nav-text" style="padding: 10px;">{{ langPack.tab.Customer }}</span>
         </a-menu-item>
-        <a-menu-item key="KWA">
+        <a-menu-item key="Order" @click="this.$router.push('/order')">
             <span style="font-size: 16px; color: white;">
                 <font-awesome-icon icon="basket-shopping" />
             </span>
             <span class="nav-text" style="padding: 10px;">{{ langPack.tab.Order }}</span>
         </a-menu-item>
-        <a-menu-item key="4">
+        <a-menu-item key="Profile" @click="this.$router.push('/profile')">
             <span style="font-size: 16px; color: white;">
                 <font-awesome-icon icon="address-card" />
             </span>
@@ -30,17 +30,17 @@
 <script setup>
 //模块引入
 import { reactive, watch, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
-import Languages from '@/views/frame/languages.js'
+import languages from '@/views/frame/languages.js'
 
 //父系入参
 const props = defineProps({
     globalObj: Object,
 })
 //本地变量和函数
-let pageObj = reactive({ name: 'sidebar', tab: ['Home'] })
+let localObj = reactive({ name: 'sidebar', tab: ['Home'] })
 
 const langPack = computed(() => {
-    return Languages[props.globalObj.locale]
+    return languages[props.globalObj.locale]
 })
 
 watch(
@@ -58,12 +58,6 @@ watch(
         deep: true,
     },
 )
-
-function changeLocale() {
-    props.globalObj.locale == 'zhCN'
-        ? props.globalObj.setLocale('enUS')
-        : props.globalObj.setLocale('zhCN')
-}
 
 onUpdated(() => {
     console.log('sidebar: onUpdated')
