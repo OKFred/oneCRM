@@ -23,11 +23,19 @@ let globalObj = reactive({
     currentTab: 'home',
     setCurrentTab: function (currentTab) {
         this.currentTab = currentTab
-    },
+    }, //设置当前tab
     locale: 'zhCN',
     setLocale: function (locale) {
         this.locale = locale
-    },
+    }, //设置语言
+    sidebarCollapse: false,
+    setSidebarCollapse: function (sidebarCollapse) {
+        this.sidebarCollapse = sidebarCollapse
+    }, //侧边栏是否收起
+    breaked: false,
+    setBreaked: function (breaked) {
+        this.breaked = breaked
+    }, //分辨率断点
 })
 
 /* var rpcDataStr = JSON.stringify(rpc);

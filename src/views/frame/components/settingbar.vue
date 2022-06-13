@@ -1,9 +1,14 @@
 <template>
     <div>
-        <a-avatar src="https://joeschmoe.io/api/v1/random" @click="this.$router.push('/profile')" />
-        <span style="padding-right: 40px"></span>
+        <a-avatar
+            src="https://joeschmoe.io/api/v1/random"
+            @click="this.$router.push('/profile')"
+            :style="{
+                marginRight: '20px',
+                display: globalObj.breaked ? 'none' : 'block',
+            }"
+        />
         <img :src="svgURL" :style="localObj.svg.str" alt="my-logo" @click="toggleSetting" />
-        <span style="padding-left: 20px; padding-right: 20px"></span>
         <div
             :style="{
                 position: 'fixed',
@@ -50,6 +55,7 @@
 </template>
 
 <script setup>
+//模块引入
 import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue'
 import svgURL from '@/assets/setting.svg'
@@ -105,12 +111,12 @@ setInterval(() => {
 }, 50)
 
 function toggleSetting() {
-    localObj.panel.width = localObj.panel.width === '0px' ? '25%' : '0px'
+    localObj.panel.width = localObj.panel.width === '0px' ? props.globalObj.breaked ? '50%' : '30%' : '0px';
 } //切换设置面板
 
 function toggleLocale() {
     props.globalObj.locale == 'zhCN'
         ? props.globalObj.setLocale('enUS')
         : props.globalObj.setLocale('zhCN')
-}
+} //切换语言
 </script>

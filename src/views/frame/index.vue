@@ -1,7 +1,7 @@
 <template>
     <div style="height: 100%">
         <div
-            name="header"
+            class="frame-header"
             style="
                 background-color: rgb(0, 21, 41);
                 display: flex;
@@ -16,36 +16,43 @@
             "
         >
             <logo-bar
-                :style="{
-                    paddingLeft: '10px',
-                    paddingRight: localObj.logoPaddingRight,
-                }"
+                class="frame-logo-bar"
+                 style="display: flex; flex-direction: row; align-items: center; padding-left: 10px;"
+                :globalObj="globalObj"
             />
             <search-bar
+                class="frame-search-bar"
                 :globalObj="globalObj"
                 :style="{
-                    paddingLeft: '25px',
-                    paddingRight: '50px',
-                    transition: 'padding 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+                    width: '100%',
+                    transition: ' padding 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+                    paddingLeft: globalObj.breaked ? '5px' : '25px',
+                    marginLeft: globalObj.breaked ? '0px' : '10px',
                 }"
             />
             <setting-bar
+                class="frame-setting-bar"
                 :globalObj="globalObj"
-                style="
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    align-content: center;
-                    padding-left: 50px;
-                    background-color: seashell;
-                    border-radius: 30px;
-                    height: 50px;
-                    margin-right: 50px;
-                "
+                :style="{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    alignContent: 'center',
+                    backgroundColor: 'seashell',
+                    borderRadius: '30px',
+                    height: '40px',
+                    paddingLeft: '40px',
+                    paddingRight: '40px',
+                    marginLeft: globalObj.breaked ? '5px' : '40px',
+                    marginRight: globalObj.breaked ? '5px' : '40px',
+                }"
             />
         </div>
         <a-layout-sider
+            width="180"
             breakpoint="md"
+            @breakpoint="onBreakpoint"
+            v-model:collapsed="globalObj.sidebarCollapse"
             collapsed-width="0"
             style="
                 position: fixed;
@@ -58,15 +65,14 @@
             <side-bar :globalObj="globalObj" />
         </a-layout-sider>
         <a-layout
-            class="layout"
+            class="frame-content"
             :style="{
                 borderRadius: '8px',
                 backgroundColor: 'rgb(227, 242, 253)',
-                paddingLeft: localObj.layoutLeft,
-                paddingTop: '80px',
+                marginTop: '80px',
                 transition: 'margin 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+                marginLeft: localObj.content.marginLeft,
             }"
-            breakpoint="md"
         >
             <a-layout-content style="padding: 20px">
                 <div style="background-color: #fff; padding: 24px; border-radius: 16px">
@@ -77,7 +83,7 @@
                     </router-view>
                 </div>
                 <a-layout-footer style="width: 100%; background-color: rgb(227, 242, 253)">
-                    <footer-bar />
+                    <footer-bar class="frame-foot-bar" />
                 </a-layout-footer>
             </a-layout-content>
         </a-layout>
@@ -86,7 +92,7 @@
 
 <script setup>
 //模块引入
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 import logoBar from '@/views/frame/components/logobar.vue'
 import searchBar from '@/views/frame/components/searchbar.vue'
 import settingBar from '@/views/frame/components/settingbar.vue'
@@ -95,31 +101,60 @@ import footerBar from '@/views/frame/components/footerbar.vue'
 
 //父系入参
 const props = defineProps({
-    globalObj: Object
+    globalObj: Object,
 })
 
 //本地变量和函数
 let localObj = reactive({
-    layoutLeft: '200px',
-    logoPaddingRight: '130px',
+    content: {
+        marginLeft: '180px',
+    },
 })
 
-const onBreakpoint = (broken) => {
-    //console.log('onBreakpoint', broken)
-    localObj.layoutLeft = broken ? '0px' : '200px'
-    localObj.logoPaddingRight = broken ? '0px' : '130px'
-} //断点处理
+// 侦听一个 getter
+watch(
+    () => props.globalObj.sidebarCollapse,
+    (newValue, oldValue) => {
+        console.log('sidebar 已收起?', newValue)
+        localObj.content.marginLeft = newValue ? '0px' : props.globalObj.breaked ? '0px' : '180px';
+        /* ... */
+    },
+)
 
-window.matchMedia('(max-width: 768px)').addEventListener('change', (e) => {
-    e.matches ? onBreakpoint(true) : onBreakpoint(false)
-}) //使用媒体查询监听器，实现响应式布局
+function onBreakpoint(broken) {
+    props.globalObj.setBreaked(broken)
+    localObj.content.marginLeft = broken ? '0px' : '180px'
+} //分辨率断点
 </script>
 
 <style>
+:root {
+    font-size: 16px;
+    font-family: 等线, sans-serif;
+    --text-dark: rgb(0, 21, 41);
+    --text-light: rgb(255, 255, 255);
+    --bg-dark: rgb(0, 21, 41);
+    --bg-light: rgb(227, 242, 253);
+}
+
 html,
 body,
 #app {
     height: 100%;
     background-color: rgb(227, 242, 253);
+    margin: 0;
+    padding: 0;
+}
+
+body::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #ccc;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #ccc;
 }
 </style>

@@ -3,11 +3,7 @@
         <div id="c1"></div>
         this is home
         <br />
-        <a-button type="primary" size="large" @click="this.$router.push('/setting')">
-            go to settting
-        </a-button>
-        <br />
-        <a-button type="secondary" size="large" @click="loadGraph">
+        <a-button type="secondary" size="large" @click="loadGraph()">
             show graph
         </a-button>
         <a-button type="secondary" size="large" @click="loadGraph('hide')">
@@ -53,7 +49,8 @@ onDeactivated(() => {
     { genre: 'Other', sold: 150 },
     ]);
 function loadGraph(hide){
-    if (hide && localObj.chart) return localObj.chart.hide();
+    if (hide && localObj.chart != null) return localObj.chart.hide();
+    if (localObj.chart != null) return localObj.chart.show();
     // Step 1: 创建 Chart 对象
     localObj.chart = new Chart({
     container: 'c1', // 指定图表容器 ID
