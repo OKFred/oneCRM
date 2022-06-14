@@ -63,7 +63,6 @@ function toggleSidebar() {
     let collapse = !props.globalObj.sidebarCollapse
     props.globalObj.setSidebarCollapse(collapse)
 } //侧边栏收起展开
-
 </script>
 
 <style scoped></style>

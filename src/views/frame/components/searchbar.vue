@@ -17,15 +17,17 @@
             <template #overlay>
                 <a-menu>
                     <a-menu-item key="1" @click="onSearch(localObj.search.value, 'email')">
-                        <font-awesome-icon icon="magnifying-glass" />{{langPack.search.email}}
+                        <font-awesome-icon icon="magnifying-glass" />{{ langPack.search.email }}
                         {{ localObj.search.value }}
                     </a-menu-item>
                     <a-menu-item key="2" @click="onSearch(localObj.search.value, 'customer')"
-                        ><font-awesome-icon icon="magnifying-glass" />{{langPack.search.customer}}
+                        ><font-awesome-icon icon="magnifying-glass" />{{
+                            langPack.search.customer
+                        }}
                         {{ localObj.search.value }}</a-menu-item
                     >
                     <a-menu-item key="3" @click="onSearch(localObj.search.value, 'order')"
-                        ><font-awesome-icon icon="magnifying-glass" />{{langPack.search.order}}
+                        ><font-awesome-icon icon="magnifying-glass" />{{ langPack.search.order }}
                         {{ localObj.search.value }}</a-menu-item
                     >
                 </a-menu>
@@ -40,7 +42,7 @@
             :placeholder="langPack.search.placeholder"
             enter-button
             @change="onInputChange"
-            @search="onSearch"
+            @search="(v) => onSearch(v)"
         />
     </div>
 </template>
@@ -81,8 +83,9 @@ watch(
 )
 
 const onSearch = (searchValue, searchType) => {
-    if (searchType) console.log("搜索分类", searchType)
-    console.log('搜索了：', searchValue)
+    if (searchType) console.log('搜索分类', searchType)
+    if (searchValue !== undefined) console.log('搜索了：', searchValue)
+    else console.log('什么也没输入')
     if (props.globalObj.breaked) toggleSearchShow()
 }
 

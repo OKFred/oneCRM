@@ -11,6 +11,9 @@ let languages = {
             email: '邮箱',
             customer: '客户',
             order: '订单',
+        },
+        notification: {
+            title: '通知',
         }
     },
     enUS: {
@@ -25,6 +28,9 @@ let languages = {
             email: 'Email',
             customer: 'Customer',
             order: 'Order',
+        },
+        notification: {
+            title: 'Notification',
         }
     },
 }

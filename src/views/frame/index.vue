@@ -17,7 +17,7 @@
         >
             <logo-bar
                 class="frame-logo-bar"
-                 style="display: flex; flex-direction: row; align-items: center; padding-left: 10px;"
+                style="display: flex; flex-direction: row; align-items: center; padding-left: 10px"
                 :globalObj="globalObj"
             />
             <search-bar
@@ -54,12 +54,7 @@
             @breakpoint="onBreakpoint"
             v-model:collapsed="globalObj.sidebarCollapse"
             collapsed-width="0"
-            style="
-                position: fixed;
-                height: 100%;
-                top: 71px;
-                z-index: 1080;
-            "
+            style="position: fixed; height: 100%; top: 71px; z-index: 1080"
         >
             <side-bar :globalObj="globalObj" />
         </a-layout-sider>
@@ -114,7 +109,7 @@ watch(
     () => props.globalObj.sidebarCollapse,
     (newValue, oldValue) => {
         //console.log('sidebar 已收起?', newValue)
-        localObj.content.marginLeft = newValue ? '0px' : props.globalObj.breaked ? '0px' : '180px';
+        localObj.content.marginLeft = newValue ? '0px' : props.globalObj.breaked ? '0px' : '180px'
     },
 )
 

@@ -1,5 +1,6 @@
 <template>
     <frameWork :globalObj="globalObj" />
+    <noteBar :globalObj="globalObj" :params="localObj.params" />
 </template>
 
 <script setup>
@@ -14,10 +15,15 @@ import '@/base/network.js'
 
 //项目
 import frameWork from '@/views/frame/index.vue'
+import noteBar from '@/views/frame/notebar.vue'
 import CountryRegions from '@/base/CountryRegions.js'
 
 //全局变量 & 函数
 window.CountryRegions = CountryRegions
+window.queryResult = (type, info) => {
+    localObj.params = [type, info]
+}
+
 let globalObj = reactive({
     name: 'globalObj',
     currentTab: 'home',
@@ -37,6 +43,11 @@ let globalObj = reactive({
         this.breaked = breaked
     }, //分辨率断点
 })
+
+//本地变量和函数
+let localObj = reactive({
+    params: [],
+}) //消息提示
 
 /* var rpcDataStr = JSON.stringify(rpc);
 function prepareMsg(What) {

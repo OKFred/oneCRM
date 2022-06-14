@@ -111,7 +111,8 @@ setInterval(() => {
 }, 50)
 
 function toggleSetting() {
-    localObj.panel.width = localObj.panel.width === '0px' ? props.globalObj.breaked ? '50%' : '30%' : '0px';
+    localObj.panel.width =
+        localObj.panel.width === '0px' ? (props.globalObj.breaked ? '50%' : '30%') : '0px'
 } //切换设置面板
 
 function toggleLocale() {
