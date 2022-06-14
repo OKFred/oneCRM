@@ -2,7 +2,7 @@
 
 This is a template for CRM, compatible for both PC and mobile, and mutli-language support (i18n).
 
-CRM模板，适配PC和电脑，支持多语言。
+CRM模板，适配PC / mobile，支持多语言
 
 Here is a preview for the user interface.
 
