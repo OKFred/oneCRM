@@ -111,6 +111,6 @@ function onInputChange(e) {
 }
 
 .ant-dropdown-placement-bottomLeft {
-    z-index: 1090;
+    z-index: 1090 !important;
 }
 </style>
