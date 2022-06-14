@@ -23,6 +23,7 @@ onMounted(() => {
 })
 onActivated(() => {
     console.log('profile: onActivated')
+    showModal(false,'this page is under construction...');
 })
 onDeactivated(() => {
     console.log('profile: onDeactivated')

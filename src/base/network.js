@@ -3,7 +3,7 @@ var main = (() => {
         ? (logger = (...args) => logTool.emitter.emit('log', 'net', ...args))
         : ''; //node--日志记录
     //if (typeof(fetch)==='undefined') fetch=require('node-fetch');
-    if (typeof FormData === 'undefined') FormData = require('form-data')
+    //if (typeof FormData === 'undefined') FormData = require('form-data')
     if (typeof URL === 'undefined') URL = require('url').URL
     if (typeof URLSearchParams === 'undefined') URLSearchParams = require('url').URLSearchParams
 
