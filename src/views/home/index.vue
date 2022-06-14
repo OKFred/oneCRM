@@ -54,7 +54,7 @@ function loadGraph(hide){
     // Step 1: 创建 Chart 对象
     localObj.chart = new Chart({
     container: 'c1', // 指定图表容器 ID
-    width: 600, // 指定图表宽度
+    autoFit: true,
     height: 300, // 指定图表高度
     });
 

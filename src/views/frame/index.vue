@@ -58,7 +58,6 @@
                 position: fixed;
                 height: 100%;
                 top: 71px;
-                transition: margin 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
                 z-index: 1080;
             "
         >
@@ -111,13 +110,11 @@ let localObj = reactive({
     },
 })
 
-// 侦听一个 getter
 watch(
     () => props.globalObj.sidebarCollapse,
     (newValue, oldValue) => {
-        console.log('sidebar 已收起?', newValue)
+        //console.log('sidebar 已收起?', newValue)
         localObj.content.marginLeft = newValue ? '0px' : props.globalObj.breaked ? '0px' : '180px';
-        /* ... */
     },
 )
 

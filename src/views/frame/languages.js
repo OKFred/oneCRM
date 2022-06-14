@@ -6,6 +6,12 @@ let languages = {
             Order: '订单',
             Profile: '我的',
         },
+        search: {
+            placeholder: '搜索或跳转',
+            email: '邮箱',
+            customer: '客户',
+            order: '订单',
+        }
     },
     enUS: {
         tab: {
@@ -14,6 +20,12 @@ let languages = {
             Order: 'Order',
             Profile: 'Profile',
         },
+        search: {
+            placeholder: 'Search or jump into',
+            email: 'Email',
+            customer: 'Customer',
+            order: 'Order',
+        }
     },
 }
 
