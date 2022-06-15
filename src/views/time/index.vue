@@ -1,8 +1,17 @@
-<template><div>This is time management. Managing your time to maximize the opportunity.</div></template>
+<template>
+    <div>
+        <a-typography-title :level="3" style="padding-bottom: 1rem;"
+            >This is time management. Managing your time to maximize the
+            opportunity.
+            </a-typography-title>
+        <todoList />
+    </div>
+</template>
 
 <script setup>
 import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
 import languages from '@/views/time/languages.js'
+import todoList from '@/views/time/components/todoList.vue'
 
 //父系入参
 const props = defineProps({

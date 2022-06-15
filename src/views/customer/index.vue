@@ -1,8 +1,16 @@
-<template><div>This is customer.</div></template>
+<template>
+    <div>
+        <h3>This is customer.</h3>
+        <customerTable :globalObj="globalObj" />
+        <customerChart :globalObj="globalObj" />
+    </div>
+</template>
 
 <script setup>
 //模块引入
 import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
+import customerTable from '@/views/customer/components/customerTable.vue'
+import customerChart from '@/views/customer/components/customerChart.vue'
 import languages from '@/views/customer/languages.js'
 
 //父系入参
@@ -30,5 +38,4 @@ onDeactivated(() => {
 })
 </script>
 
-<style>
-</style>
+<style></style>
