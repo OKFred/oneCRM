@@ -14,6 +14,11 @@ let languages = {
         },
         notification: {
             title: '通知',
+        },
+        modal: {
+            title: '对话框',
+            ok: '确认',
+            cancel: '取消'
         }
     },
     enUS: {
@@ -31,6 +36,11 @@ let languages = {
         },
         notification: {
             title: 'Notification',
+        },
+        modal: {
+            title: 'Dialog',
+            ok: 'OK',
+            cancel: 'Cancel'
         }
     },
 }

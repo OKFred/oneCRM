@@ -32,7 +32,6 @@ notification.config({
 function queryResult(type, info) {
     let noteType = type ? 'success' : 'error'
     let noteInfo = typeof info === 'object' ? JSON.stringify(info) : info
-    if (noteInfo) noteInfo = noteInfo.replace(/\\n/g, '\n')
     notification[noteType]({
         message: langPack.value.notification.title,
         description: noteInfo,

@@ -1,6 +1,7 @@
 <template>
     <frameWork :globalObj="globalObj" />
-    <noteBar :globalObj="globalObj" :params="localObj.params" />
+    <noteBar :globalObj="globalObj" :params="localObj.notification.params" />
+    <modalBar :globalObj="globalObj" :params="localObj.modal.params" />
 </template>
 
 <script setup>
@@ -16,12 +17,16 @@ import '@/base/network.js'
 //项目
 import frameWork from '@/views/frame/index.vue'
 import noteBar from '@/views/frame/notebar.vue'
+import modalBar from '@/views/frame/modalbar.vue'
 import CountryRegions from '@/base/CountryRegions.js'
 
 //全局变量 & 函数
 window.CountryRegions = CountryRegions
 window.queryResult = (type, info) => {
-    localObj.params = [type, info]
+    localObj.notification.params = [type, info]
+}
+window.showModal = (type, info) => {
+    localObj.modal.params = [type, info]
 }
 
 let globalObj = reactive({
@@ -46,7 +51,14 @@ let globalObj = reactive({
 
 //本地变量和函数
 let localObj = reactive({
-    params: [],
+    notification: {
+        params: [],
+    },
+    modal: {
+        params: [],
+        result: false,
+        show: false,
+    }
 }) //消息提示
 
 /* var rpcDataStr = JSON.stringify(rpc);
