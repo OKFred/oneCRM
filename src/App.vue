@@ -1,12 +1,13 @@
 <template>
     <frameWork :globalObj="globalObj" />
-    <noteBar :globalObj="globalObj" :params="localObj.notification.params" />
-    <modalBar :globalObj="globalObj" :params="localObj.modal.params" />
+    <noteBar :globalObj="globalObj" />
+    <modalBar :globalObj="globalObj" />
 </template>
 
 <script setup>
 //模块引入
 import { reactive } from 'vue'
+import 'ant-design-vue/dist/antd.css'
 
 //通用
 import '@/base/proto_date.js'
@@ -23,43 +24,52 @@ import CountryRegions from '@/base/CountryRegions.js'
 //全局变量 & 函数
 window.CountryRegions = CountryRegions
 window.queryResult = (type, info) => {
-    localObj.notification.params = [type, info]
+    globalObj.notification.params = [type, info]
 }
 window.showModal = (type, info) => {
-    localObj.modal.params = [type, info]
+    globalObj.modal.params = [type, info]
 }
 
 let globalObj = reactive({
     name: 'globalObj',
-    currentTab: 'home',
-    setCurrentTab: function (currentTab) {
-        this.currentTab = currentTab
+    tab: {
+        currentTab: 'Home',
+    },
+    setTab: function (obj) {
+        this.tab = { ...this.tab, ...obj }
     }, //设置当前tab
-    locale: 'zhCN',
-    setLocale: function (locale) {
-        this.locale = locale
+    locale: {
+        language: 'zhCN',
+    },
+    setLocale: function (obj) {
+        this.locale = { ...this.locale, ...obj }
     }, //设置语言
-    sidebarCollapse: false,
-    setSidebarCollapse: function (sidebarCollapse) {
-        this.sidebarCollapse = sidebarCollapse
-    }, //侧边栏是否收起
-    breaked: false,
-    setBreaked: function (breaked) {
-        this.breaked = breaked
+    sidebar: {
+        collapse: false,
+    },
+    setSidebar: function (obj) {
+        this.sidebar = { ...this.sidebar, ...obj }
+        if (this.sidebar.collapse) console.log('sidebar 已收起?', this.sidebar.collapse)
+    }, //设置侧边栏
+    display: {
+        breaked: false,
     }, //分辨率断点
-})
-
-//本地变量和函数
-let localObj = reactive({
+    setDisplay: function (obj) {
+        this.display = { ...this.display, ...obj }
+    },
     notification: {
         params: [],
-    },
+    }, //消息提示
     modal: {
         params: [],
-        result: false,
         show: false,
-    }
-}) //消息提示
+        result: false,
+    }, //对话框(传参，显示，结果)
+    setModal: function (obj) {
+        this.modal = { ...this.modal, ...obj }
+        console.log(this.modal.result ? 'ok' : 'cancel')
+    },
+})
 
 /* var rpcDataStr = JSON.stringify(rpc);
 function prepareMsg(What) {

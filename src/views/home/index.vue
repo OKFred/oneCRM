@@ -21,7 +21,7 @@ const props = defineProps({
 let localObj = reactive({ name: 'home', chart: null })
 
 const langPack = computed(() => {
-    return languages[props.globalObj.locale]
+    return languages[props.globalObj.locale.language]
 })
 
 onUpdated(() => {

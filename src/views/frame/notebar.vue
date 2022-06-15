@@ -5,27 +5,25 @@
 import { computed, watch } from 'vue'
 import { notification } from 'ant-design-vue'
 import languages from '@/views/frame/languages.js'
-import 'ant-design-vue/dist/antd.css'
 
 //父系入参
 const props = defineProps({
-    globalObj: Object,
-    params: Array,
+    globalObj: Object
 })
 
 //本地变量和函数
 const langPack = computed(() => {
-    return languages[props.globalObj.locale]
+    return languages[props.globalObj.locale.language]
 })
 
 watch(
-    () => props.params,
+    () => props.globalObj.notification.params,
     (newValue /* , oldValue */) => {
         if (newValue) queryResult(...newValue)
     },
 )
 notification.config({
-    maxCount: 5,
+    maxCount: 3,
     placement: 'bottomRight',
     onClick: () => {},
 })

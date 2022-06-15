@@ -38,7 +38,7 @@
             class="search-input"
             v-if="localObj.search.show"
             v-model:value="localObj.search.value"
-            :size="globalObj.breaked ? 'default' : 'large'"
+            :size="globalObj.display.breaked ? 'default' : 'large'"
             :placeholder="langPack.search.placeholder"
             enter-button
             @change="onInputChange"
@@ -70,11 +70,11 @@ let localObj = reactive({
 })
 
 const langPack = computed(() => {
-    return languages[props.globalObj.locale]
+    return languages[props.globalObj.locale.language]
 })
 
 watch(
-    () => props.globalObj.breaked,
+    () => props.globalObj.display.breaked,
     (newValue, oldValue) => {
         //console.log('断点了？', newValue)
         localObj.search.show = !newValue
@@ -86,7 +86,7 @@ const onSearch = (searchValue, searchType) => {
     if (searchType) console.log('搜索分类', searchType)
     if (searchValue !== undefined) console.log('搜索了：', searchValue)
     else console.log('什么也没输入')
-    if (props.globalObj.breaked) toggleSearchShow()
+    if (props.globalObj.display.breaked) toggleSearchShow()
 }
 
 function toggleSearchShow() {

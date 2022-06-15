@@ -2,9 +2,9 @@ let languages = {
     zhCN: {
         tab: {
             Home: '首页',
-            Customer: '客户',
-            Order: '订单',
-            Profile: '我的',
+            Customer: '客户管理',
+            Time: '时间管理',
+            Revenue: '业绩',
         },
         search: {
             placeholder: '搜索或跳转',
@@ -25,8 +25,8 @@ let languages = {
         tab: {
             Home: 'Home',
             Customer: 'Customer',
-            Order: 'Order',
-            Profile: 'Profile',
+            Time: 'Time',
+            Revenue: 'Revenue',
         },
         search: {
             placeholder: 'Search or jump into',

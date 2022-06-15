@@ -2,10 +2,10 @@
     <div>
         <a-avatar
             src="https://joeschmoe.io/api/v1/random"
-            @click="this.$router.push('/profile')"
+            @click="this.$router.push('/time')"
             :style="{
                 marginRight: '20px',
-                display: globalObj.breaked ? 'none' : 'block',
+                display: globalObj.display.breaked ? 'none' : 'block',
             }"
         />
         <img :src="svgURL" :style="localObj.svg.str" alt="my-logo" @click="toggleSetting" />
@@ -59,7 +59,7 @@
 import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue'
 import svgURL from '@/assets/setting.svg'
-import languages from '@/views/profile/languages.js'
+import languages from '@/views/revenue/languages.js'
 
 //父系入参
 const props = defineProps({
@@ -83,20 +83,20 @@ let localObj = reactive({
 })
 
 const langPack = computed(() => {
-    return languages[props.globalObj.locale]
+    return languages[props.globalObj.locale.language]
 })
 
 /* onUpdated(() => {
-    console.log('profile: onUpdated')
+    console.log('revenue: onUpdated')
 }) */
 onMounted(() => {
-    console.log('profile: onMounted')
+    console.log('revenue: onMounted')
 })
 onActivated(() => {
-    console.log('profile: onActivated')
+    console.log('revenue: onActivated')
 })
 onDeactivated(() => {
-    console.log('profile: onDeactivated')
+    console.log('revenue: onDeactivated')
 })
 setInterval(() => {
     localObj.svg.deg =
@@ -112,12 +112,12 @@ setInterval(() => {
 
 function toggleSetting() {
     localObj.panel.width =
-        localObj.panel.width === '0px' ? (props.globalObj.breaked ? '50%' : '30%') : '0px'
+        localObj.panel.width === '0px' ? (props.globalObj.display.breaked ? '50%' : '30%') : '0px'
 } //切换设置面板
 
 function toggleLocale() {
-    props.globalObj.locale == 'zhCN'
-        ? props.globalObj.setLocale('enUS')
-        : props.globalObj.setLocale('zhCN')
+    props.globalObj.locale.language == 'zhCN'
+        ? props.globalObj.setLocale({ language: 'enUS' })
+        : props.globalObj.setLocale({ language: 'zhCN' })
 } //切换语言
 </script>

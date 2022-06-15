@@ -23,26 +23,26 @@
             <span class="nav-text" style="padding: 10px">{{ langPack.tab.Customer }}</span>
         </a-menu-item>
         <a-menu-item
-            key="Order"
-            @click="this.$router.push('/order')"
+            key="Time"
+            @click="this.$router.push('/time')"
             @mouseenter="onColor"
             @mouseleave="offColor"
         >
             <span class="nav-icon" style="font-size: 16px">
-                <font-awesome-icon icon="basket-shopping" />
+                <font-awesome-icon icon="business-time" />
             </span>
-            <span class="nav-text" style="padding: 10px">{{ langPack.tab.Order }}</span>
+            <span class="nav-text" style="padding: 10px">{{ langPack.tab.Time }}</span>
         </a-menu-item>
         <a-menu-item
-            key="Profile"
-            @click="this.$router.push('/profile')"
+            key="Revenue"
+            @click="this.$router.push('/revenue')"
             @mouseenter="onColor"
             @mouseleave="offColor"
         >
             <span class="nav-icon" style="font-size: 16px">
-                <font-awesome-icon icon="address-card" />
+                <font-awesome-icon icon="money-bill-trend-up" />
             </span>
-            <span class="nav-text" style="padding: 10px">{{ langPack.tab.Profile }}</span>
+            <span class="nav-text" style="padding: 10px">{{ langPack.tab.Revenue }}</span>
         </a-menu-item>
     </a-menu>
 </template>
@@ -62,7 +62,7 @@ let localObj = reactive({
 })
 
 const langPack = computed(() => {
-    return languages[props.globalObj.locale]
+    return languages[props.globalObj.locale.language]
 })
 
 onUpdated(() => {

@@ -26,8 +26,8 @@
                 :style="{
                     width: '100%',
                     transition: ' padding 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
-                    paddingLeft: globalObj.breaked ? '5px' : '25px',
-                    marginLeft: globalObj.breaked ? '0px' : '10px',
+                    paddingLeft: globalObj.display.breaked ? '5px' : '25px',
+                    marginLeft: globalObj.display.breaked ? '0px' : '10px',
                 }"
             />
             <setting-bar
@@ -43,8 +43,8 @@
                     height: '40px',
                     paddingLeft: '40px',
                     paddingRight: '40px',
-                    marginLeft: globalObj.breaked ? '5px' : '40px',
-                    marginRight: globalObj.breaked ? '5px' : '40px',
+                    marginLeft: globalObj.display.breaked ? '5px' : '40px',
+                    marginRight: globalObj.display.breaked ? '5px' : '40px',
                 }"
             />
         </div>
@@ -52,7 +52,7 @@
             width="180"
             breakpoint="md"
             @breakpoint="onBreakpoint"
-            v-model:collapsed="globalObj.sidebarCollapse"
+            v-model:collapsed="globalObj.sidebar.collapse"
             collapsed-width="0"
             style="position: fixed; height: 100%; top: 71px; z-index: 1080"
         >
@@ -106,16 +106,16 @@ let localObj = reactive({
 })
 
 watch(
-    () => props.globalObj.sidebarCollapse,
+    () => props.globalObj.sidebar.collapse,
     (newValue, oldValue) => {
         //console.log('sidebar 已收起?', newValue)
-        localObj.content.marginLeft = newValue ? '0px' : props.globalObj.breaked ? '0px' : '180px'
+        localObj.content.marginLeft = newValue ? '0px' : props.globalObj.display.breaked ? '0px' : '180px'
     },
 )
 
-function onBreakpoint(broken) {
-    props.globalObj.setBreaked(broken)
-    localObj.content.marginLeft = broken ? '0px' : '180px'
+function onBreakpoint(breaked) {
+    props.globalObj.setDisplay({ breaked });
+    localObj.content.marginLeft = breaked ? '0px' : '180px'
 } //分辨率断点
 </script>
 

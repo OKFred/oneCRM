@@ -14,23 +14,23 @@ const routes = [
         name: 'Customer',
         component: () => import('@/views/customer/index.vue'),
         meta: {
-            title: '客户'
+            title: '客户管理'
         }
     },
     {
-        path: '/order',
-        name: 'Order',
-        component: () => import('@/views/order/index.vue'),
+        path: '/time',
+        name: 'Time',
+        component: () => import('@/views/time/index.vue'),
         meta: {
-            title: '订单'
+            title: '时间管理'
         }
     },
     {
-        path: '/profile',
-        name: 'Profile',
-        component: () => import('@/views/profile/index.vue'),
+        path: '/revenue',
+        name: 'Revenue',
+        component: () => import('@/views/revenue/index.vue'),
         meta: {
-            title: '我的'
+            title: '业绩'
         }
     }
 ]

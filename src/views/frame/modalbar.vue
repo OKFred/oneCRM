@@ -1,18 +1,20 @@
 <template>
-    <a-modal :ok-text="langPack.modal.ok" :cancel-text="langPack.modal.cancel"
-        v-model:visible="localObj.modal.visible" />
+    <a-modal
+        :ok-text="langPack.modal.ok"
+        :cancel-text="langPack.modal.cancel"
+        v-model:visible="localObj.modal.visible"
+    />
 </template>
 
 <script setup>
 //模块引入
 import { reactive, computed, watch } from 'vue'
-import { Modal } from 'ant-design-vue';
+import { Modal } from 'ant-design-vue'
 import languages from '@/views/frame/languages.js'
 
 //父系入参
 const props = defineProps({
     globalObj: Object,
-    params: Array,
 })
 
 //本地变量和函数
@@ -22,36 +24,40 @@ let localObj = reactive({
     },
 })
 const langPack = computed(() => {
-    return languages[props.globalObj.locale]
+    return languages[props.globalObj.locale.language]
 })
 
 watch(
-    () => props.params,
+    () => props.globalObj.modal.params,
     (newValue /* , oldValue */) => {
-        if (newValue) queryResult(...newValue)
+        if (newValue) showModal(...newValue)
     },
 )
 
-function queryResult(type, info) {
-    let noteType = type ? 'success' : 'error'
-    let noteInfo = typeof info === 'object' ? JSON.stringify(info) : info
+function showModal(content, title) {
+    let modalContent = typeof content === 'object' ? JSON.stringify(content) : content;
+    let modalTitle = title !== undefined ? title : langPack.value.modal.title;
+    if (props.globalObj.modal.show) return false; //当前已经有对话框了
+    setTimeout(onShow, 0); //对话框显示中...
     Modal.confirm({
-        title: noteType,
-        content: noteInfo,
-        onOk: () => console.log('ok'),
-        onCancel: () => console.log('cancel')
+        title: modalTitle,
+        content: modalContent,
+        closable: true,
+        onOk,
+        onCancel,
     })
+}
+
+function onOk() {
+    props.globalObj.setModal({ show: false, result: true })
+}
+function onCancel() {
+    props.globalObj.setModal({ show: false, result: false })
+}
+function onShow() {
+    props.globalObj.setModal({ show: true })
 }
 </script>
 
 <style>
-/* .ant-notification {
-    z-index: 9999;
-}
-.ant-notification-notice-message {
-    font-weight: bold;
-}
-.ant-notification-notice-description {
-    font-size: 1rem;
-} */
 </style>

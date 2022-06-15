@@ -1,34 +1,32 @@
-<template><div>This is customer.</div></template>
+<template><div>This is time management. Managing your time to maximize the opportunity.</div></template>
 
 <script setup>
-//模块引入
 import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
-import languages from '@/views/customer/languages.js'
+import languages from '@/views/time/languages.js'
 
 //父系入参
 const props = defineProps({
     globalObj: Object,
 })
 //本地变量和函数
-let localObj = reactive({ name: 'customer' })
+let localObj = reactive({ name: 'time' })
 
 const langPack = computed(() => {
     return languages[props.globalObj.locale.language]
 })
 
 onUpdated(() => {
-    console.log('customer: onUpdated')
+    console.log('time: onUpdated')
 })
 onMounted(() => {
-    console.log('customer: onMounted')
+    console.log('time: onMounted')
 })
 onActivated(() => {
-    console.log('customer: onActivated')
+    console.log('time: onActivated')
 })
 onDeactivated(() => {
-    console.log('customer: onDeactivated')
+    console.log('time: onDeactivated')
 })
 </script>
 
-<style>
-</style>
+<style></style>

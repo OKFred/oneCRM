@@ -9,7 +9,7 @@
                 color: 'snow',
                 fontSize: '2rem',
                 paddingLeft: '10px',
-                display: globalObj.breaked ? 'none' : 'block',
+                display: globalObj.display.breaked ? 'none' : 'block',
             }"
             >CRM</span
         >
@@ -18,7 +18,7 @@
             :style="{
                 color: 'white',
                 fontSize: '1.5rem',
-                paddingLeft: globalObj.breaked ? '15px' : '45px',
+                paddingLeft: globalObj.display.breaked ? '15px' : '45px',
             }"
         >
             <font-awesome-icon
@@ -36,7 +36,6 @@
 <script setup>
 //模块引入
 import { reactive, watch, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
-import languages from '@/views/frame/languages.js'
 
 //父系入参
 const props = defineProps({
@@ -51,17 +50,16 @@ let localObj = reactive({
 })
 
 watch(
-    () => props.globalObj.sidebarCollapse,
+    () => props.globalObj.sidebar.collapse,
     (newValue, oldValue) => {
-        //console.log('sidebar 已收起?', newValue)
         localObj.sidebarIcon.transform = newValue ? 'rotate(180deg)' : 'rotate(0deg)'
         /* ... */
     },
 )
 
 function toggleSidebar() {
-    let collapse = !props.globalObj.sidebarCollapse
-    props.globalObj.setSidebarCollapse(collapse)
+    let collapse = !props.globalObj.sidebar.collapse
+    props.globalObj.setSidebar({ collapse })
 } //侧边栏收起展开
 </script>
 
