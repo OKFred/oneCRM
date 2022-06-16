@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <!-- 未登录不显示搜索栏 -->
+    <div v-if="props.globalObj.login.hasLogin">
         <span
             v-if="!localObj.search.show"
             class="logo-icon"
@@ -34,7 +35,7 @@
             </template>
         </a-dropdown>
         <a-input-search
-            style="width: 88%"
+            style="width: 60%"
             class="search-input"
             v-if="localObj.search.show"
             v-model:value="localObj.search.value"
@@ -49,7 +50,7 @@
 
 <script setup>
 //模块引入
-import { ref, reactive, watch, computed } from 'vue'
+import { reactive, watch, computed } from 'vue'
 import languages from '@/views/frame/languages.js'
 
 //父系入参
@@ -80,6 +81,7 @@ watch(
         localObj.search.show = !newValue
         /* ... */
     },
+    { immediate: true }
 )
 
 const onSearch = (searchValue, searchType) => {

@@ -13,8 +13,10 @@
             }"
             >CRM</span
         >
+            <!-- 未登录不显示侧边栏开关 -->
         <span
-            class="sidebar-icon"
+                v-if="props.globalObj.login.hasLogin"
+            class="sidebar-toggle-icon"
             :style="{
                 color: 'white',
                 fontSize: '1.5rem',

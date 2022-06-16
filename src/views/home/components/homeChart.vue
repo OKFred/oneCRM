@@ -1,10 +1,20 @@
 <template>
-    <div style="height: 100%; width: 50%">
-        <div id="c1"></div>
-        <br />
-        <a-button type="secondary" size="large" @click="toggleGraph()"> show graph </a-button>
-        <a-button type="secondary" size="large" @click="toggleGraph('hide')"> hide graph </a-button>
-    </div>
+    <a-row type="flex">
+        <a-col :xs="0" :sm="0" :md="6" :lg="6" :xl="8"></a-col>
+        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
+            <div id="c1"></div>
+            <hr />
+            <div style="display: flex; flex-direction: column; justify-content: center">
+                <a-button type="secondary" size="large" @click="toggleGraph()">
+                    {{ langPack.graph.show }}
+                </a-button>
+                <a-button type="secondary" size="large" @click="toggleGraph('hide')">
+                    {{ langPack.graph.hide }}
+                </a-button>
+            </div>
+        </a-col>
+        <a-col :xs="0" :sm="0" :md="6" :lg="6" :xl="8"></a-col>
+    </a-row>
 </template>
 
 <script setup>
@@ -33,7 +43,6 @@ const langPack = computed(() => {
 })
 
 function toggleGraph(hide) {
-    queryResult(!hide, hide ? 'hide graph' : 'show graph')
     if (hide) {
         if (localObj.chart != null) localObj.chart.hide()
         return

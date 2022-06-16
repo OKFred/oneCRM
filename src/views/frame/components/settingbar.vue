@@ -1,8 +1,10 @@
 <template>
     <div>
+        <!-- 未登录不显示头像 -->
         <a-avatar
+            v-if="props.globalObj.login.hasLogin"
             src="https://joeschmoe.io/api/v1/random"
-            @click="this.$router.push('/time')"
+            @click="this.$router.push('/login')"
             :style="{
                 marginRight: '20px',
                 display: globalObj.display.breaked ? 'none' : 'block',
@@ -27,28 +29,47 @@
             }"
             @click="toggleSetting"
         >
-            <h3>设置 settings</h3>
-            <div>
+            <h2>设置 settings</h2>
+            <hr />
+            <div style="display: flex; flex-direction: column">
                 <span @click.prevent="(e) => e.stopPropagation()"
                     ><a-switch
-                        v-model:checked="localObj.switch.checked1"
+                        v-model:checked="localObj.switch.language"
                         checked-children="中文"
                         un-checked-children="English"
                         @change="toggleLocale"
-                /></span>
+                    />
+                    {{ langPack.settings.language }}</span
+                >
                 <br />
                 <span @click.prevent="(e) => e.stopPropagation()"
                     ><a-switch
-                        v-model:checked="localObj.switch.checked2"
-                        checked-children="1"
-                        un-checked-children="0"
-                /></span>
+                        v-model:checked="localObj.switch.rightClick"
+                        :checked-children="langPack.confirm.enable"
+                        :un-checked-children="langPack.confirm.disable"
+                        @change="toggleRightClick"
+                    />
+                    {{ langPack.settings.rightClick }}</span
+                >
                 <br />
                 <span @click.prevent="(e) => e.stopPropagation()"
-                    ><a-switch v-model:checked="localObj.switch.checked3">
-                        <template #checkedChildren><check-outlined /></template>
-                        <template #unCheckedChildren><close-outlined /></template> </a-switch
-                ></span>
+                    ><a-switch
+                        v-model:checked="localObj.switch.mode"
+                        :checked-children="langPack.confirm.enable"
+                        :un-checked-children="langPack.confirm.disable"
+                        @change="toggleMode"
+                    />
+                    {{ langPack.settings.mode }}</span
+                >
+                <a-button
+                    type="primary"
+                    size="large"
+                    style="bottom: 5px; position: absolute"
+                    block
+                    v-show="globalObj.login.hasLogin"
+                    @click="this.$router.push('/login')"
+                    >{{ langPack.settings.logout }}</a-button
+                >
             </div>
         </div>
     </div>
@@ -59,7 +80,7 @@
 import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue'
 import svgURL from '@/assets/setting.svg'
-import languages from '@/views/revenue/languages.js'
+import languages from '@/views/frame/languages.js'
 
 //父系入参
 const props = defineProps({
@@ -72,9 +93,9 @@ let localObj = reactive({
         width: '0px',
     },
     switch: {
-        checked1: true,
-        checked2: false,
-        checked3: false,
+        language: true, //zhCN-enUS
+        rightClick: true, //是否禁用右键菜单
+        mode: false,
     },
     svg: {
         deg: 0,
@@ -87,16 +108,16 @@ const langPack = computed(() => {
 })
 
 /* onUpdated(() => {
-    console.log('revenue: onUpdated')
+    console.log('setting: onUpdated')
 }) */
 onMounted(() => {
-    console.log('revenue: onMounted')
+    console.log('setting: onMounted')
 })
 onActivated(() => {
-    console.log('revenue: onActivated')
+    console.log('setting: onActivated')
 })
 onDeactivated(() => {
-    console.log('revenue: onDeactivated')
+    console.log('setting: onDeactivated')
 })
 setInterval(() => {
     localObj.svg.deg =
@@ -111,8 +132,8 @@ setInterval(() => {
 }, 50)
 
 function toggleSetting() {
-    localObj.panel.width =
-        localObj.panel.width === '0px' ? (props.globalObj.display.breaked ? '50%' : '30%') : '0px'
+    let panelWidth = props.globalObj.display.breaked ? '50%' : '30%'
+    localObj.panel.width = localObj.panel.width === '0px' ? panelWidth : '0px'
 } //切换设置面板
 
 function toggleLocale() {
@@ -120,4 +141,16 @@ function toggleLocale() {
         ? props.globalObj.setLocale({ language: 'enUS' })
         : props.globalObj.setLocale({ language: 'zhCN' })
 } //切换语言
+
+function toggleRightClick() {
+    props.globalObj.display.rightClick
+        ? props.globalObj.setDisplay({ rightClick: false })
+        : props.globalObj.setDisplay({ rightClick: true })
+} //切换右键菜单
+
+function toggleMode() {
+    props.globalObj.display.mode
+        ? props.globalObj.setDisplay({ mode: false })
+        : props.globalObj.setDisplay({ mode: true })
+} //切换工作模式
 </script>

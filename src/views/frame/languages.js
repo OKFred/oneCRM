@@ -19,6 +19,19 @@ let languages = {
             title: '对话框',
             ok: '确认',
             cancel: '取消'
+        },
+        settings: {
+            language: '语言/Lang.',
+            rightClick: '右键菜单',
+            mode: '模式切换',
+            logout: '退出登录',
+        },
+        confirm: {
+            enable: '启用',
+            disable: '禁用',
+        },
+        warning: {
+            loginFirst: '请先登录',
         }
     },
     enUS: {
@@ -41,6 +54,19 @@ let languages = {
             title: 'Dialog',
             ok: 'OK',
             cancel: 'Cancel'
+        },
+        settings: {
+            language: 'Lang./语言',
+            rightClick: 'Right-click menu',
+            mode: 'Toggle mode',
+            logout: 'Logout',
+        },
+        confirm: {
+            enable: 'Enable',
+            disable: 'Disable',
+        },
+        warning: {
+            loginFirst: 'Please login first',
         }
     },
 }

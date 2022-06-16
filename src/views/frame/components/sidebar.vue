@@ -1,8 +1,8 @@
 <template>
     <a-menu v-model:selectedKeys="localObj.tab" theme="dark" mode="inline">
         <a-menu-item
-            key="Home"
-            @click="this.$router.push('/')"
+            key="home"
+            @click="checkAndRedirect('home')"
             @mouseenter="onColor"
             @mouseleave="offColor"
         >
@@ -12,8 +12,8 @@
             <span class="nav-text" style="padding: 10px">{{ langPack.tab.Home }}</span>
         </a-menu-item>
         <a-menu-item
-            key="Customer"
-            @click="this.$router.push('/customer')"
+            key="customer"
+            @click="checkAndRedirect('customer')"
             @mouseenter="onColor"
             @mouseleave="offColor"
         >
@@ -23,8 +23,8 @@
             <span class="nav-text" style="padding: 10px">{{ langPack.tab.Customer }}</span>
         </a-menu-item>
         <a-menu-item
-            key="Time"
-            @click="this.$router.push('/time')"
+            key="time"
+            @click="checkAndRedirect('time')"
             @mouseenter="onColor"
             @mouseleave="offColor"
         >
@@ -34,8 +34,8 @@
             <span class="nav-text" style="padding: 10px">{{ langPack.tab.Time }}</span>
         </a-menu-item>
         <a-menu-item
-            key="Revenue"
-            @click="this.$router.push('/revenue')"
+            key="revenue"
+            @click="checkAndRedirect('revenue')"
             @mouseenter="onColor"
             @mouseleave="offColor"
         >
@@ -51,6 +51,8 @@
 //模块引入
 import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
 import languages from '@/views/frame/languages.js'
+import router from '@/router/index' // 跳路由
+import { useRoute } from 'vue-router' // 获取路由参数
 
 //父系入参
 const props = defineProps({
@@ -88,6 +90,15 @@ function offColor(e) {
     Array.from(e.target.children).forEach((child) => {
         child.style.color = 'white'
     })
+}
+
+function checkAndRedirect(path) {
+    if (!props.globalObj.login.hasLogin)
+        return queryResult(false, langPack.value.warning.loginFirst)
+    return router.push(`/${path}`)
+    let route = useRoute()
+    console.log(route.query.id)
+    console.log(route.params.id)
 }
 </script>
 
