@@ -6,6 +6,8 @@
             src="https://joeschmoe.io/api/v1/random"
             @click="this.$router.push('/login')"
             :style="{
+                width: '30px',
+                height: '30px',
                 marginRight: '20px',
                 display: globalObj.display.breaked ? 'none' : 'block',
             }"
@@ -67,7 +69,7 @@
                     style="bottom: 5px; position: absolute"
                     block
                     v-show="globalObj.login.hasLogin"
-                    @click="this.$router.push('/login')"
+                    @click="goLogin(true)"
                     >{{ langPack.settings.logout }}</a-button
                 >
             </div>
@@ -78,7 +80,7 @@
 <script setup>
 //模块引入
 import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue'
+
 import svgURL from '@/assets/setting.svg'
 import languages from '@/views/frame/languages.js'
 
@@ -153,4 +155,12 @@ function toggleMode() {
         ? props.globalObj.setDisplay({ mode: false })
         : props.globalObj.setDisplay({ mode: true })
 } //切换工作模式
+
+async function goLogin(logout) {
+	return console.log('go login')
+    if (logout) await //doLogout()
+    props.globalObj.setTab({
+        currentTab: 'login',
+    })
+}
 </script>

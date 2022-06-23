@@ -10,7 +10,7 @@
             >
                 <a-form-item
                     name="username"
-                    :rules="[{ pattern: /^\D{1,30}$/, trigger: 'blur', validator }]"
+                    :rules="[{ pattern: /^\D{1,60}$/, trigger: 'blur', validator }]"
                 >
                     <a-input
                         v-model:value="localObj.username"
@@ -19,7 +19,7 @@
                 </a-form-item>
                 <a-form-item
                     name="pwd"
-                    :rules="[{ pattern: /^.{1,30}$/, trigger: 'blur', validator }]"
+                    :rules="[{ pattern: /^.{1,60}$/, trigger: 'blur', validator }]"
                 >
                     <a-input-password
                         v-model:value="localObj.pwd"
@@ -34,7 +34,7 @@
                 </a-form-item>
                 <a-form-item
                     name="tel"
-                    :rules="[{ pattern: /^\d{1,30}$/, trigger: 'blur', validator }]"
+                    :rules="[{ pattern: /^.{1,30}$/, trigger: 'blur', validator }]"
                 >
                     <a-input v-model:value="localObj.tel" :placeholder="langPack.form.tel" />
                 </a-form-item>
@@ -59,7 +59,6 @@
 //模块引入
 import { reactive, computed, onDeactivated } from 'vue'
 import languages from '@/views/login/languages.js'
-import router from '@/router/index'
 
 //父系入参
 const props = defineProps({
@@ -116,7 +115,9 @@ async function doLogin(obj) {
     if (loginResult) {
         setTimeout(() => {
             props.globalObj.setLogin({ hasLogin: true, loginInfo: loginResult })
-            router.push('/home')
+            props.globalObj.setTab({
+                currentTab: 'home',
+            })
         }, 1500)
         queryResult(true, langPack.value.form.loginSuccess)
     } else {

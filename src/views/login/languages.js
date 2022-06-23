@@ -13,6 +13,7 @@ let languages = {
             reset: '重置',
             loginSuccess: '登录成功',
             loginFailed: '登录失败',
+            hasLoggedIn: '已登录，自动跳转',
         },
     },
     enUS: {
@@ -29,6 +30,7 @@ let languages = {
             reset: 'Reset',
             loginSuccess: 'Login success',
             loginFailed: 'Login failed',
+            hasLoggedIn: 'Has logged in, redirecting...',
         },
     },
 }

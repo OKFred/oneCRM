@@ -1,10 +1,9 @@
 <template>
     <div>
-        <a-typography-title :level="3" style="padding-bottom: 1rem;"
-            >This is time management. Managing your time to maximize the
-            opportunity.
-            </a-typography-title>
-        <todoList />
+        <a-typography-title :level="3" style="padding-bottom: 1rem"
+            >时间管理
+        </a-typography-title>
+        <todoList :globalObj="globalObj" :localObj="localObj" />
     </div>
 </template>
 
@@ -18,7 +17,11 @@ const props = defineProps({
     globalObj: Object,
 })
 //本地变量和函数
-let localObj = reactive({ name: 'time' })
+let localObj = reactive({
+    name: 'time',
+    todoToday: [],
+    newTodo: false,
+})
 
 const langPack = computed(() => {
     return languages[props.globalObj.locale.language]

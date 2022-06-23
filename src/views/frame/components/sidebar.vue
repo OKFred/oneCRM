@@ -1,5 +1,5 @@
 <template>
-    <a-menu v-model:selectedKeys="localObj.tab" theme="dark" mode="inline">
+    <a-menu v-model:selectedKeys="localObj.selectedKeys" theme="dark" mode="inline">
         <a-menu-item
             key="home"
             @click="checkAndRedirect('home')"
@@ -49,10 +49,8 @@
 
 <script setup>
 //模块引入
-import { reactive, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
+import { reactive, watch, computed, onMounted, onActivated, onDeactivated, onUpdated } from 'vue'
 import languages from '@/views/frame/languages.js'
-import router from '@/router/index' // 跳路由
-import { useRoute } from 'vue-router' // 获取路由参数
 
 //父系入参
 const props = defineProps({
@@ -61,7 +59,16 @@ const props = defineProps({
 //本地变量和函数
 let localObj = reactive({
     name: 'sidebar',
+    selectedKeys: [],
 })
+
+watch(
+    () => props.globalObj.tab.currentTab,
+    (newValue, oldValue) => {
+        if (newValue && newValue !== 'login') localObj.selectedKeys = [newValue]
+    },
+    { immediate: true },
+) //页面跳转和侧边栏对应
 
 const langPack = computed(() => {
     return languages[props.globalObj.locale.language]
@@ -92,13 +99,13 @@ function offColor(e) {
     })
 }
 
-function checkAndRedirect(path) {
+function checkAndRedirect(tab) {
     if (!props.globalObj.login.hasLogin)
         return queryResult(false, langPack.value.warning.loginFirst)
-    return router.push(`/${path}`)
-    let route = useRoute()
-    console.log(route.query.id)
-    console.log(route.params.id)
+    props.globalObj.setTab({
+        currentTab: tab,
+    })
+    return
 }
 </script>
 

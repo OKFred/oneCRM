@@ -3,7 +3,15 @@
         :ok-text="langPack.modal.ok"
         :cancel-text="langPack.modal.cancel"
         v-model:visible="localObj.modal.visible"
-    />
+        :destroyOnClose="true"
+        width="50%"
+        :title="localObj.modal.title"
+        @ok="onOk"
+        @cancel="onCancel"
+        :closable="true"
+        ><div v-if="localObj.modal.htmlContent" v-html="localObj.modal.htmlContent"></div>
+        <div v-if="localObj.modal.content">{{ localObj.modal.content }}</div></a-modal
+    >
 </template>
 
 <script setup>
@@ -21,6 +29,7 @@ const props = defineProps({
 let localObj = reactive({
     modal: {
         visible: false,
+        htmlContent: '',
     },
 })
 const langPack = computed(() => {
@@ -34,30 +43,37 @@ watch(
     },
 )
 
-function showModal(content, title) {
-    let modalContent = typeof content === 'object' ? JSON.stringify(content) : content;
-    let modalTitle = title !== undefined ? title : langPack.value.modal.title;
-    if (props.globalObj.modal.show) return false; //当前已经有对话框了
-    setTimeout(onShow, 0); //对话框显示中...
-    Modal.confirm({
+function showModal(content, title, isHTML = true) {
+    console.log('running')
+    let modalContent = typeof content === 'object' ? JSON.stringify(content) : content
+    let modalTitle = title !== undefined ? title : langPack.value.modal.title
+    if (localObj.modal.visible) return false //当前已经有对话框了
+    localObj.modal.title = modalTitle
+    if (isHTML) {
+        localObj.modal.htmlContent = modalContent
+        localObj.modal.content = ''
+    } else {
+        localObj.modal.htmlContent = ''
+        localObj.modal.content = modalContent
+    }
+    localObj.modal.visible = true;
+    /* Modal.confirm({
         title: modalTitle,
         content: modalContent,
         closable: true,
         onOk,
         onCancel,
-    })
+    }) */
 }
 
 function onOk() {
-    props.globalObj.setModal({ show: false, result: true })
+    props.globalObj.setModal({ result: true })
+    localObj.modal.visible = false;
 }
 function onCancel() {
-    props.globalObj.setModal({ show: false, result: false })
-}
-function onShow() {
-    props.globalObj.setModal({ show: true })
+    props.globalObj.setModal({ result: false })
+    localObj.modal.visible = false;
 }
 </script>
 
-<style>
-</style>
+<style></style>

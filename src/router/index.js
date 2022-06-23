@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
     {
-        path: '/login',
+        path: '/login.html',
         name: 'Login',
         component: () => import('@/views/login/index.vue'),
         meta: {
@@ -10,7 +10,7 @@ const routes = [
         }
     },
     {
-        path: '/home',
+        path: '/home.html',
         name: 'Home',
         component: () => import('@/views/home/index.vue'),
         meta: {
@@ -18,7 +18,7 @@ const routes = [
         }
     },
     {
-        path: '/customer',
+        path: '/customer.html',
         name: 'Customer',
         component: () => import('@/views/customer/index.vue'),
         meta: {
@@ -26,7 +26,7 @@ const routes = [
         }
     },
     {
-        path: '/time',
+        path: '/time.html',
         name: 'Time',
         component: () => import('@/views/time/index.vue'),
         meta: {
@@ -34,7 +34,7 @@ const routes = [
         }
     },
     {
-        path: '/revenue',
+        path: '/revenue.html',
         name: 'Revenue',
         component: () => import('@/views/revenue/index.vue'),
         meta: {

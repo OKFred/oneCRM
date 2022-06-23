@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h3>This is customer.</h3>
-        <customerTable :globalObj="globalObj" />
+        <h3>客户管理</h3>
+        <customerTable :globalObj="globalObj" :localObj="localObj" />
         <customerChart :globalObj="globalObj" />
     </div>
 </template>
@@ -32,6 +32,8 @@ onMounted(() => {
 })
 onActivated(() => {
     console.log('customer: onActivated')
+    let urlParams = new URLSearchParams(location.search.replace(`?`, ''))
+    let task = urlParams.get('task') //todo 自动任务
 })
 onDeactivated(() => {
     console.log('customer: onDeactivated')

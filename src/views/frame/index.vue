@@ -96,7 +96,6 @@ import searchBar from '@/views/frame/components/searchbar.vue'
 import settingBar from '@/views/frame/components/settingbar.vue'
 import sideBar from '@/views/frame/components/sidebar.vue'
 import footerBar from '@/views/frame/components/footerbar.vue'
-import router from '@/router/index'
 
 //父系入参
 const props = defineProps({
@@ -112,15 +111,26 @@ let localObj = reactive({
 
 onUpdated(() => {
     console.log('页面更新') //比如登录了
-    if (!props.globalObj.login.hasLogin) router.push('/login')
+    if (!props.globalObj.login.hasLogin) {
+        props.globalObj.setTab({
+            currentTab: 'login',
+        })
+    }
 })
 
 watch(
     () => props.globalObj.login.hasLogin,
     (newValue, oldValue) => {
         toggleMargin()
-        if (!newValue) router.push('/login')
-        else router.push('/home') //登录(缓存)检查并跳转
+        if (!newValue) {
+            props.globalObj.setTab({
+                currentTab: 'login',
+            })
+        } else {
+            props.globalObj.setTab({
+                currentTab: 'home',
+            })
+        } //登录(缓存)检查并跳转
     },
     { immediate: true },
 ) //[登录] p.s.: 隐藏无关的功能

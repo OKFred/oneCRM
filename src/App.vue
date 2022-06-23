@@ -7,7 +7,10 @@
 <script setup>
 //模块引入
 import { reactive } from 'vue'
+import router from '@/router/index'
+//import { useRoute } from 'vue-router' // 获取路由参数
 import 'ant-design-vue/dist/antd.css'
+import '@/views/extension/bridger.js' //全局注册用于插件模式
 
 //通用
 import '@/base/proto_date.js'
@@ -24,11 +27,16 @@ import CountryRegions from '@/base/CountryRegions.js'
 //全局变量 & 函数
 let globalObj = reactive({
     name: 'globalObj',
+    msgs: {}, //消息处理
     tab: {
-        currentTab: 'Home',
-    },
+        currentTab: 'home',
+        params: '',
+    }, //页面切换
     setTab: function (obj) {
         this.tab = { ...this.tab, ...obj }
+        let path = `/${this.tab.currentTab}.html`
+        if (obj.params) path = path + '?' + obj.params
+        router.push(path)
     }, //设置当前tab
     locale: {
         language: 'zhCN',
@@ -72,12 +80,15 @@ let globalObj = reactive({
     },
     modal: {
         params: [],
-        show: false,
         result: false,
     }, //对话框(传参，显示，结果)
     setModal: function (obj) {
         this.modal = { ...this.modal, ...obj }
         console.log(this.modal.result ? 'ok' : 'cancel')
+    },
+    baseData: {},
+    setBaseData: function (obj) {
+        this.baseData = { ...this.baseData, ...obj }
     },
 })
 
@@ -85,8 +96,8 @@ window.CountryRegions = CountryRegions
 window.queryResult = (type, info) => {
     globalObj.notification.params = [type, info]
 }
-window.showModal = (type, info) => {
-    globalObj.modal.params = [type, info]
+window.showModal = (content, title) => {
+    globalObj.modal.params = [content, title]
 }
 window.oncontextmenu = function (e) {
     if (!globalObj.display.rightClick) e.preventDefault()
@@ -102,6 +113,11 @@ function onBreakpoint(breaked) {
     globalObj.display.breaked = breaked
 } //分辨率断点
 
+window.handler = (msg) => {
+    //console.log('新消息');
+    let { tab } = msg.info
+    globalObj.msgs[tab] = msg
+} //插件模式：消息分发给每个tab去处理
 
 /* var rpcDataStr = JSON.stringify(rpc);
 function prepareMsg(What) {

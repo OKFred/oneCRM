@@ -11,7 +11,8 @@
                 paddingLeft: '10px',
                 display: globalObj.display.breaked ? 'none' : 'block',
             }"
-            >CRM</span
+            @click="toggleLogoName"
+            >{{localObj.logo.name}}</span
         >
             <!-- 未登录不显示侧边栏开关 -->
         <span
@@ -46,6 +47,9 @@ const props = defineProps({
 
 //本地变量和函数
 let localObj = reactive({
+    logo: {
+        name:'CRM',
+    },
     sidebarIcon: {
         transform: 'rotate(0deg)',
     },
@@ -63,6 +67,10 @@ function toggleSidebar() {
     let collapse = !props.globalObj.sidebar.collapse
     props.globalObj.setSidebar({ collapse })
 } //侧边栏收起展开
+
+function toggleLogoName() {
+   localObj.logo.name = localObj.logo.name === 'Roma' ? 'CRM' : 'Roma'
+}
 </script>
 
 <style scoped></style>
