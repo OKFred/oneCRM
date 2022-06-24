@@ -5,6 +5,7 @@
 </template>
 
 <script setup>
+//模块引入
 import { reactive, watch, computed } from 'vue'
 import languages from '@/views/customer/languages.js'
 import DataSet from '@antv/data-set'

@@ -1,23 +1,20 @@
 <template>
-    <a-row type="flex">
-        <a-col :xs="0" :sm="0" :md="6" :lg="6" :xl="8"></a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
-            <div id="container"></div>
-            <hr />
-            <div style="display: flex; flex-direction: column; justify-content: center">
-                <a-button type="secondary" size="large" @click="toggleGraph()">
-                    {{ langPack.graph.show }}
-                </a-button>
-                <a-button type="secondary" size="large" @click="toggleGraph('hide')">
-                    {{ langPack.graph.hide }}
-                </a-button>
-            </div>
-        </a-col>
-        <a-col :xs="0" :sm="0" :md="6" :lg="6" :xl="8"></a-col>
-    </a-row>
+    <div>
+        <div id="chartSalesConversion"></div>
+        <hr />
+        <div style="display: flex; flex-direction: column; justify-content: center">
+            <a-button type="secondary" size="large" @click="toggleGraph()">
+                {{ langPack.graph.show }}
+            </a-button>
+            <a-button type="secondary" size="large" @click="toggleGraph('hide')">
+                {{ langPack.graph.hide }}
+            </a-button>
+        </div>
+    </div>
 </template>
 
 <script setup>
+//模块引入
 import { reactive, computed } from 'vue'
 import languages from '@/views/customer/languages.js'
 import DataSet from '@antv/data-set'
@@ -61,10 +58,10 @@ function graphMaker() {
     })
     const data = dv.rows
     localObj.chart = new Chart({
-        container: 'container',
+        container: 'chartSalesConversion',
         autoFit: true,
         height: 500,
-        padding: [20, 120, 95],
+        padding: [60, 100, 60, 10] /* 上边 | 左边右边 | 下边 */,
     })
     localObj.chart.data(data)
     localObj.chart.axis(false)
@@ -85,7 +82,7 @@ function graphMaker() {
         .adjust('symmetric')
         .position('action*percent')
         .shape('funnel')
-        .color('action', ['#0050B3', '#1890FF', '#40A9FF', '#69C0FF', '#BAE7FF'])
+        .color('action', ['brown', 'lightcoral', 'orange', 'orangered', 'red'])
         .label(
             'action*pv',
             (action, pv) => {

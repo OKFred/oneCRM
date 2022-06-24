@@ -4,7 +4,7 @@
         <a-avatar
             v-if="props.globalObj.login.hasLogin"
             src="https://joeschmoe.io/api/v1/random"
-            @click="this.$router.push('/login')"
+            @click="goLogin()"
             :style="{
                 width: '30px',
                 height: '30px',
@@ -157,8 +157,8 @@ function toggleMode() {
 } //切换工作模式
 
 async function goLogin(logout) {
-	return console.log('go login')
-    if (logout) await //doLogout()
+    console.log('go login')
+    //if (logout) await //doLogout()
     props.globalObj.setTab({
         currentTab: 'login',
     })
