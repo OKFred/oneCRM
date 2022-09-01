@@ -8,6 +8,10 @@ CRM模板，适配PC / mobile，支持多语言
 Here is a preview for the user interface.
 
 ![image](https://img.alicdn.com/imgextra/i4/O1CN01erQiBj255bM8ajUnG_!!6000000007475-2-tps-1422-659.png)
+
 ![image](https://img.alicdn.com/imgextra/i3/O1CN01pixh3O1RvjoFHDOcL_!!6000000002174-2-tps-1218-712.png)
-![image](https://img.alicdn.com/imgextra/i3/O1CN01i9jNOR1jd6mXBECu0_!!6000000004570-2-tps-1115-683.png)![image](https://user-images.githubusercontent.com/67962064/173517842-837aba9c-f15b-4a2f-9b8b-f314d45bf049.png)
+
+![image](https://user-images.githubusercontent.com/67962064/187924807-374cd6f4-137f-4b29-bfc4-8ae49403af14.png)
+
+![image](https://user-images.githubusercontent.com/67962064/173517842-837aba9c-f15b-4a2f-9b8b-f314d45bf049.png)
  
